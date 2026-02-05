@@ -36,16 +36,6 @@
           <div class="search-card"><el-input v-model="search" size="mini" placeholder="输入关键字搜索"></el-input></div>
           <span class="stats" @click="handleUpload"><i class="fas fa-upload upload-icon"></i><span class="stats-text">记录数: </span>{{ Number }}</span>
           <input type="file" ref="fileInput" style="display: none;" multiple @change="uploadFiles">
-          <!-- 批量操作工具栏 -->
-          <div class="batch-toolbar" v-show="selectedFiles.length > 0">
-            <span class="batch-count">已选 {{ selectedFiles.length }} 项</span>
-            <el-button-group size="mini">
-              <el-button type="primary" icon="el-icon-document-copy" @click="handleBatchCopy">复制链接</el-button>
-              <el-button type="danger" icon="el-icon-delete" @click="handleBatchDelete">删除</el-button>
-              <el-button icon="el-icon-download" @click="handleBatchDownload">下载</el-button>
-              <el-button @click="clearSelection">取消选择</el-button>
-            </el-button-group>
-          </div>
           <div class="actions">
             <el-dropdown @command="switchFileType" :hide-on-click="false">
               <span class="el-dropdown-link"><i :class="fileTypeIcon"></i></span>
@@ -322,6 +312,18 @@
       </el-main>
     </el-container>
   </div>
+  <!-- 底部悬浮批量操作栏 -->
+  <transition name="batch-float">
+    <div class="batch-toolbar" v-show="selectedFiles.length > 0">
+      <span class="batch-count">已选 {{ selectedFiles.length }} 项</span>
+      <el-button-group size="mini">
+        <el-button type="primary" icon="el-icon-document-copy" @click="handleBatchCopy">复制链接</el-button>
+        <el-button type="danger" icon="el-icon-delete" @click="handleBatchDelete">删除</el-button>
+        <el-button icon="el-icon-download" @click="handleBatchDownload">下载</el-button>
+        <el-button @click="clearSelection">取消选择</el-button>
+      </el-button-group>
+    </div>
+  </transition>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script> <!-- Vue -->
 <script src="https://cdn.jsdelivr.net/npm/element-ui@2.15.3/lib/index.js"></script> <!-- ElementUI -->
